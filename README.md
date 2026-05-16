@@ -1,124 +1,133 @@
 # Dapur Senja
 
-**Sistem reservasi restoran/ kafe berbasis SPA**
-menggunakan React dengan tema “sunset vibes”.
-Aplikasi ini dibuat dengan Vite 6, Tailwind CSS 4, Framer Motion 12, Google Generative AI.
+Sebuah situs web pemesanan restoran/kafe berbasis satu halaman (landing page) dengan estetika “sunset vibes”. Dibuat menggunakan **React 19 + TypeScript**, dibundel oleh **Vite 6**, diperindah dengan **Tailwind CSS 4**, dan dinamisasi dengan **Framer Motion 12**. Form reservasi terintegrasi dengan WhatsApp, dan situs ini memanggil **Google Generative AI** untuk konten dinamis.
+
+> **Production**: <https://dapursenja.vercel.app/>  
+> **Demo** (same as production): <https://dapursenja.vercel.app/>  
 
 ![Screenshot](https://github.com/ngetikin/dapursenja/blob/main/image.png?raw=true)
-
-## 🔗 Link
-
-- **Demo** : <https://dapursenja.vercel.app/>
-- **Repositori**: <https://github.com/ngetikin/dapursenja>
 
 ---
 
 ## ✨ Fitur Utama
 
-| 🚀 Fitur | 📖 Penjelasan |
-|----------|---------------|
-| **Beranda** | Menampilkan highlight menu, galeri, testimoni. |
+| Fitur | Penjelasan |
+|------|-------------|
+| **Beranda** | Menampilkan highlight menu, galeri, dan testimoni. |
 | **Menu** | Daftar produk kopi & makanan terperinci, filter kategori, highlight best‑seller. |
 | **Galeri** | Foto ambience dan produk dengan kategori. |
 | **Reservasi** | Form reservasi lengkap, integrasi dengan WhatsApp. |
-| **Cache & Motion** | Animasi scroll menggunakan Framer Motion; image lazy‑load. |
-| **Responsif** | Menyesuaikan tampilan perangkat mobile, tablet & desktop. |
-| **TypeScript** | Dukungan tipe statis & linting. |
+| **Animasi & Lazy‑Load** | Scroll animasi menggunakan Framer Motion, gambar di‑load secara lazy. |
+| **Responsif** | Tampilan mobile‑first, tablet & desktop. |
+| **TypeScript** | Tipe statik + linting mengurangi bug di runtime. |
 
 ---
 
-## 🛠️ Stack Teknologi
+## 🛠️ Tech Stack
 
-| Kategori | Teknologi |
+| Komponen | Teknologi |
 |----------|-----------|
-| **Frontend** | React 19 (strict mode) / Vite 6 / TypeScript |
-| **UI** | Tailwind CSS 4 / Framer Motion 12 / lucide‑react |
-| **Routing** | React Router `v7` |
-| **AI** | Google Generative AI (`@google/genai` – `GEMINI_API_KEY`) |
-| **Bundler** | esbuild (dapat dioptimasi lewat Vite) |
-| **Build** | Vite (dev, build, preview) |
-| **Lint** | `tsc --noEmit` (type checking) |
-| **Env** | `.env` (contoh: `GEMINI_API_KEY=…`) |
-
-> **Catatan**: Paket `express` sudah di‑install namun belum digunakan; proyek ini bersifat frontend‑only.
+| **Frontend** | React 19, Vite 6, TypeScript, Tailwind CSS 4, Framer Motion 12, lucide‑react |
+| **AI** | Google Generative AI (`@google/genai` – uses `GEMINI_API_KEY`) |
+| **Utilities** | `npm` scripts, `tsc` (`npm run lint`), `npm run preview` |
+| **Deployment** | Netlify/Vercel (static site) |
 
 ---
 
 ## 📦 Instalasi
 
-```bash
-# 1. Clone repositori
-git clone https://github.com/ngetikin/dapursenja.git
-cd dapursenja
+1. **Clone repositori**
 
-# 2. Install dependensi
-npm install          # atau use `pnpm install`/`yarn`
-# 3. Copy file contoh `.env.example` (jika ada) atau buat `.env`
-cp .env.example .env   # buat jika file contoh tersedia
-vim .env              # tambahkan variabel
+   ```bash
+   git clone https://github.com/ngetikin/dapursenja.git
+   cd dapursenja
+   ```
 
-# 4. Jalankan server development
-npm run dev
+2. **Pasang dependensi**
 
-# 5. Build untuk produksi
-npm run build
-```
+   ```bash
+   npm install          # atau gunakan `pnpm install` / `yarn`
+   ```
 
-> Server development di‑expose pada `http://localhost:3000`.
+3. **Setel variabel lingkungan**  
+   Salin contoh `.env.example` (jika ada) ke `.env` dan isi kunci API:
+
+   ```bash
+   cp .env.example .env
+   vim .env           # tambahkan GEMINI_API_KEY dan variabel lain
+   ```
+
+4. **Jalankan server pengembangan**
+
+   ```bash
+   npm run dev
+   ```
+
+   Server tersedia di <http://localhost:3000> (dapat diakses secara publik jika diset `0.0.0.0`).
+
+5. **Buat build produksi**
+
+   ```bash
+   npm run build
+   npm run preview          # preview build lokal
+   ```
+
+---
+
+## ⚙️ Variabel Lingkungan
+
+| Variabel | Keterangan |
+|----------|------------|
+| `GEMINI_API_KEY` | Kunci API Google Generative AI yang digunakan oleh backend integrasi WhatsApp |
+
+> Catatan: Tidak ada server backend; semua layanan eksternal dipanggil lewat client‑side API calls.
 
 ---
 
 ## 🚀 Penggunaan
 
-| Perintah | Tujuan |
-|----------|--------|
-| `npm run dev` | Jalankan dev server (Vite) |
-| `npm run build` | Bikin bundle produksi |
+| Perintah | Deskripsi |
+|----------|-----------|
+| `npm run dev` | Run dev server (Vite) |
+| `npm run build` | Buat bundle produksi |
 | `npm run preview` | Preview hasil build |
-| `npm run clean` | Hapus folder `dist` dan `server.js` |
-| `npm run lint` | Lakukan type‑checking Typescript |
-
-**Langkah sederhana menguji produksi**
-
-```bash
-npm run build
-npm run preview
-```
+| `npm run clean` | Hapus folder `dist/` |
+| `npm run lint` | Kinerja TypeScript type‑checking (`tsc --noEmit`) |
 
 ---
 
 ## 📁 Struktur Proyek
 
 ```
-dapursenja/
-├─ public/             # index html, favicon, dll.
+da​pursenja/
+├─ public/               # index.html, favicon, dll.
 ├─ src/
 │  ├─ components/
-│  │   ├─ layout/        # Navbar, Footer
-│  │   ├─ ui/           # UI reusable component
-│  │   └─ utils/         # ScrollToTop
-│  ├─ constants/       # data statis (menu, gallery, testimoni)
-│  ├─ pages/             # router pages (Home, About, Menu, Gallery, Reservation)
-│  ├─ App.tsx           # Root component Routing
-│  ├─ main.tsx          # bootstrap aplikasi
-│  └─ index.css         # Tailwind import + custom
-├─ index.html           # Vite entry
-├─ vite.config.ts      # konfigurasi bundler + env
+│  │  ├─ layout/        # Navbar, Footer
+│  │  ├─ ui/            # UI reusable component
+│  │  └─ utils/         # util utilities (misalnya ScrollToTop)
+│  ├─ constants/        # data statis (menu, galeri, testimoni)
+│  ├─ pages/            # router pages (Home, About, Menu, Gallery, Reservation)
+│  ├─ App.tsx            # Root component Routing
+│  ├─ main.tsx           # bootstrap aplikasi
+│  └─ index.css          # Tailwind import + custom
+├─ index.html            # Vite entry
+├─ vite.config.ts       # konfigurasi bundler + env
 ├─ package.json
 └─ tsconfig.json
 ```
 
 ---
 
-## 📸 Screenshot
+## 📸 Screenshots
 
-![Screenshot](https://github.com/ngetikin/dapursenja/blob/main/image.png?raw=true)
+- ![Screenshot](https://github.com/ngetikin/dapursenja/blob/main/image.png?raw=true)
 
 ---
 
-## ⛏️ Roadmap
+## 🧪 Testing
 
-> (Belum ada item roadmap terdefinisi dalam repositori ini.)
+Proyek ini tidak mengimplementasikan unit‑test atau end‑to‑end test. Ditambah, folder `tests/` belum ada. Jika diperlukan, tambahkan skrip lint (`npm run lint`) dan setup testing framework di masa depan.
 
 ---
 
@@ -126,12 +135,14 @@ dapursenja/
 
 1. Fork proyek dan buat branch baru (`git checkout -b feat/...`).
 2. Sinkronkan perubahan branch master (`git pull`).
-3. Commit dengan pesan semantik (e.g., `feat: add sticky CTA`).
+3. Commit dengan pesan semantik (mis. `feat: add sticky CTA`).
 4. Push ke remote dan buat Pull Request.
-5. Pastikan lint/tsc tanpa error.
+5. Pastikan `npm run lint` dan `npm run build` tanpa error.
 
 ---
 
 ## 📄 Lisensi
 
-Kode ini dilisensikan di bawah **MIT**. Lihat file `LICENSE` (jika ada) atau periksa komentar header.
+Kode ini dilisensikan di bawah **MIT**. Lihat file `LICENSE`.
+
+---
